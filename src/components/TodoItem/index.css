@@ -1,0 +1,14 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+button {
+  border-color: pink;
+  color: pink;
+}
+
+li {
+  list-style-type: none;
+}
