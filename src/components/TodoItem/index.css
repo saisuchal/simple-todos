@@ -1,14 +1,75 @@
-.item {
+.to-do-item {
   display: flex;
   flex-direction: row;
+  min-width: 50vw;
   justify-content: space-between;
+  margin: 5px;
 }
 
-button {
-  border-color: pink;
-  color: pink;
+.delete-button {
+  color: #ff0b37;
+  background-color: transparent;
+  border: 2px solid #ff0b37;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 65px;
+  margin: 2px;
+}
+.save-button {
+  background-color: green;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 65px;
+  margin: 2px;
+}
+.edit-button {
+  color: black;
+  background-color: rgb(241, 237, 16);
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 65px;
+  margin: 2px;
 }
 
-li {
+.list-item {
   list-style-type: none;
+}
+
+.button-div {
+  display: flex;
+  flex-direction: row;
+  min-width: 10vw;
+  justify-content: space-around;
+}
+
+.title-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  max-width: 40vw;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.edit-title {
+  min-width: 35vw;
+}
+
+.checkbox{
+  margin-right:10px;
+}
+
+@media screen and (max-width: 767px) {
+  .to-do-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 50vw;
+    justify-content: space-between;
+    margin: 5px;
+  }
 }

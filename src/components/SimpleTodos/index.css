@@ -1,13 +1,51 @@
-.peach {
+.bg-div {
   background-color: #ffc2a0;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  min-height: 100vh;
 }
-.white {
+.todos-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
-  width: 60vw;
-  margin: 100px;
+  padding: 50px;
+  border-radius: 10px;
 }
 
-h1 {
-  color: #ffc2a0;
+.heading {
+  color: #ff8542;
+}
+
+.add-button {
+  color: white;
+  background-color: rgb(16, 121, 241);
+  border: 2px solid white;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 65px;
+}
+
+.add-todo-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-list{
+  padding:0px;
+}
+
+@media screen and (max-width: 575px) {
+  .bg-div {
+    padding: 5px;
+  }
+  .todos-div {
+    padding: 5px;
+    margin: 0px;
+  }
 }

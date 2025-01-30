@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import './index.css'
 
 import TodoItem from '../TodoItem'
 
@@ -38,26 +39,74 @@ const initialTodosList = [
 ]
 
 class SimpleTodos extends Component {
-  state = {list: initialTodosList}
+  state = {list: initialTodosList, titleInput: ''}
+
+  deleteTodo = id => {
+    const {list} = this.state
+    console.log(id)
+    const filteredList = list.filter(eachItem => parseInt(id) !== eachItem.id)
+    console.log(filteredList)
+    this.setState({list: filteredList})
+  }
+
+  setInput = event => {
+    const {value} = event.target
+    this.setState({titleInput: value})
+  }
+
+  addTodos = () => {
+    const {titleInput, list} = this.state
+    const splitTitle = titleInput.split(' ')
+    const repetitionNumber = splitTitle[splitTitle.length - 1]
+    const splitTitleArray = splitTitle.slice(0, splitTitle.length - 1)
+    const title = splitTitleArray.join(' ')
+    console.log(title)
+    const lastId = list[list.length - 1].id
+    const subList = []
+    let id = lastId + 1
+    if (
+      parseInt(repetitionNumber) === Number(repetitionNumber) &&
+      parseInt(repetitionNumber) >= 1
+    ) {
+      while (id <= lastId + parseInt(repetitionNumber)) {
+        const titleObject = {id, title}
+        subList.push(titleObject)
+        id += 1
+      }
+      this.setState(prevState => ({list: prevState.list.concat(subList)}))
+    } else if (titleInput === '' || parseInt(repetitionNumber) === 0) {
+      this.setState({list})
+    } else {
+      this.setState(prevState => ({
+        list: [...prevState.list, {id, title: titleInput}],
+      }))
+    }
+  }
 
   render() {
     const {list} = this.state
-    const setState = filteredList => {
-      this.setState({list: filteredList})
-    }
+    console.log(list)
     return (
-      <div className="peach">
-        <div className="white">
-          <h1>Simple Todos</h1>
-          <ul>
+      <div className="bg-div">
+        <div className="todos-div">
+          <h1 className="heading">Simple Todos</h1>
+          <div className="add-todo-div">
+            <input type="textbox" onChange={this.setInput} />
+            <button
+              type="button"
+              onClick={this.addTodos}
+              className="add-button"
+            >
+              Add
+            </button>
+          </div>
+          <ul className="todo-list">
             {list.map(item => (
               <TodoItem
                 item={item}
-                key={item.id}
                 id={item.id}
-                state={this.state}
-                setState={setState}
-                initialTodosList={initialTodosList}
+                key={`cart${item.id}`}
+                deleteTodo={this.deleteTodo}
               />
             ))}
           </ul>
