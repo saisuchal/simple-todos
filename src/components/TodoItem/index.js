@@ -35,7 +35,6 @@ class TodoItem extends Component {
 
   render() {
     const {edit, checked} = this.state
-    console.log(edit, checked)
     const {todoTitle} = this.state
     const {item} = this.props
     const {id} = item

@@ -41,11 +41,15 @@ const initialTodosList = [
 class SimpleTodos extends Component {
   state = {list: initialTodosList, titleInput: ''}
 
+  componentDidMount() {
+    const {list} = this.state
+    const lastId = list[list.length - 1].id
+    this.setState({lastId})
+  }
+
   deleteTodo = id => {
     const {list} = this.state
-    console.log(id)
     const filteredList = list.filter(eachItem => parseInt(id) !== eachItem.id)
-    console.log(filteredList)
     this.setState({list: filteredList})
   }
 
@@ -55,13 +59,11 @@ class SimpleTodos extends Component {
   }
 
   addTodos = () => {
-    const {titleInput, list} = this.state
+    const {titleInput, list, lastId} = this.state
     const splitTitle = titleInput.split(' ')
     const repetitionNumber = splitTitle[splitTitle.length - 1]
     const splitTitleArray = splitTitle.slice(0, splitTitle.length - 1)
     const title = splitTitleArray.join(' ')
-    console.log(title)
-    const lastId = list[list.length - 1].id
     const subList = []
     let id = lastId + 1
     if (
@@ -79,6 +81,7 @@ class SimpleTodos extends Component {
     } else {
       this.setState(prevState => ({
         list: [...prevState.list, {id, title: titleInput}],
+        lastId: id,
       }))
     }
   }
@@ -100,16 +103,23 @@ class SimpleTodos extends Component {
               Add
             </button>
           </div>
-          <ul className="todo-list">
-            {list.map(item => (
-              <TodoItem
-                item={item}
-                id={item.id}
-                key={`cart${item.id}`}
-                deleteTodo={this.deleteTodo}
-              />
-            ))}
-          </ul>
+          {list.length > 0 ? (
+            <ul className="todo-list">
+              {list.map(item => (
+                <TodoItem
+                  item={item}
+                  id={item.id}
+                  key={`cart${item.id}`}
+                  deleteTodo={this.deleteTodo}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div style={{textAlign: 'center'}}>
+              <p>There are no tasks to display.</p>
+              <p>Click the &quot;Add&quot; button to add a new task.</p>
+            </div>
+          )}
         </div>
       </div>
     )
